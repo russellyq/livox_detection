@@ -8,8 +8,8 @@ We deploy deepfusion methods on [MOT](https://github.com/wangxiyang2022/DeepFusi
 
 ## Demo
 
-[demo1](demo/its1%2000_00_00-00_00_30.gif) 
-[demo2](demo/its2%2000_00_00-00_00_30.gif)
+![demo1](demo/its1%2000_00_00-00_00_30.gif) 
+![demo2](demo/its2%2000_00_00-00_00_30.gif)
 
 # Dependencies
 - `python3.6+`
