@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <param name="DB_CONF"   type='string'  value="$(find livox_detection)/config/config.yaml"/> 
+  <node pkg="livox_detection" name="livox_rotate_translate_repub" type="livox_rotate_translate_repub" output="screen"></node>
+  
+</launch>
+

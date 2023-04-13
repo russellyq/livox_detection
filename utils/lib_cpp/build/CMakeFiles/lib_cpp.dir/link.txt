@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -O3 -DNDEBUG  -shared  -o lib_cpp.so CMakeFiles/lib_cpp.dir/lib_cpp.cpp.o -flto 

@@ -1,0 +1,69 @@
+————————————————————————————————————————————————————————————————————————————————
+Debug-log by YQ: tested on Y9000P with RTX 3070 Laptop
+
+Inference time around 30ms+
+————————————————————————————————————————————————————————————————————————————————
+
+TensorRT 加速
+
+1. checkpoints转pb文件
+
+(1)修改./network/model.py文件中的 "is_traning = False" 和 "input_bev_img_pl = tf.placeholder(tf.int8, shape=(batch_size, self.img_height, self.img_width, self.channels))"
+
+(2) 在class Detector类中修改：
+def __init__():
+
+        feed_dict = {self.ops['input_bev_img_pl']: batch_bev_img}
+        feature_out,\
+            = self.sess.run([self.ops['end_points']['feature_out'],
+                             ], feed_dict=feed_dict)
+
+        constant_graph = tf.graph_util.convert_variables_to_constants(self.sess, self.sess.graph_def, ['Conv_39/BiasAdd'])
+        with tf.gfile.FastGFile('./model_pb/saved_model.pb', mode='wb') as f:
+            f.write(constant_graph.SerializeToString())
+
+得到.pb文件
+
+-----------------------------------------------------------------------------------------------------
+
+2. pb文件转onnx
+（https://github.com/onnx/tensorflow-onnx）
+
+python3 -m tf2onnx.convert --input ./model_pb/saved_model.pb --output ./model_pb/saved_model.onnx --inputs Placeholder:0 --outputs Conv_39/BiasAdd:0 --verbose
+
+得到onnx文件
+
+---------------------------------------------------------------------------------------------------------
+
+3. onnx转 trt
+(https://zhuanlan.zhihu.com/p/165359425)
+
+(1) pip install pycuda
+
+(2)安装TensorRT
+a. CUDA + CUDNN 要和TensorRT版本对应 ！！！
+b. 下载 TensorRT (下载tar.gz压缩包)
+c. 安装 TensorRT (cd 进入 ./python ./uff ./graphsurgeon 文件分别 pip install XXX.whl ) (参考连接)
+d. TensorRT 环境配置
+e. TensorRT/bin/trtexec 将 onnx 模型转换为 trt 引擎
+
+/home/yq-robot/Downloads/TensorRT-7.2.2.3/bin/trtexec --onnx=./model_pb/saved_model.onnx --saveEngine=./model_pb/saved_engine.trt --workspace=5800
+
+---------------------------------------------------------------------------------------------------
+
+4. trt 加载 onnx
+(1)创建引擎
+(2)推理
+(3)具体见 livox_rosMot_tower_no_img_trt.py 和 livox_trt_model.py
+
+---------------------------------------------------------------------------------------------------
+
+5. 关于版本问题：
+
+（1）之前电脑配置cuda 11.2 cudnn 8.1.1(tensorRT没有)
+
+（2）改装cuda11.1  cudnn 8.0.5  TensorRT-7.2.2.3 版本对应
+
+（3）转换模型的时候 input 和 output 的 shape 就已经固定了，修改config.py中的 RANGE 参数后需要重复上述步骤导出 trt 模型哦
+
+（4）trt模型和GPU计算力和TensorRT版本相关
