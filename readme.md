@@ -1,13 +1,13 @@
 ## Livox Detection for ITS applications
 
-This repo is built on [livox detection](https://github.com/Livox-SDK/livox_detection).
+This repository is built based on the previous work [livox detection](https://github.com/Livox-SDK/livox_detection).
 
-We further deploy on our own devices with TensorRT model.
+We further deploy the pre-trained model on our own devices and accelerate by TensorRT with an FPS of '15Hz' on GTX 1080Ti out of the original [pretrained model](https://github.com/Livox-SDK/livox_detection) whose FPS merely '5Hz'.
 
 We deploy deepfusion methods on [MOT](https://github.com/wangxiyang2022/DeepFusionMOT).
 
 ## Demo
-
+We fine-tune the model on our own dataset for demonstration as below:
 ![demo1](demo/its1%2000_00_00-00_00_30.gif) 
 ![demo2](demo/its2%2000_00_00-00_00_30.gif)
 
