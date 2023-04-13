@@ -2,7 +2,7 @@
 
 This repository is built based on the previous work [livox detection](https://github.com/Livox-SDK/livox_detection).
 
-We further deploy the pre-trained model on our own devices and accelerate by TensorRT with an FPS of '15Hz' on GTX 1080Ti out of the original [pretrained model](https://github.com/Livox-SDK/livox_detection) whose FPS merely '5Hz'.
+We further deploy the pre-trained model on our own devices and accelerate by TensorRT with an FPS of `15Hz` on GTX 1080Ti out of the original [pretrained model](https://github.com/Livox-SDK/livox_detection) whose FPS merely `5Hz` .
 
 We deploy deepfusion methods on [MOT](https://github.com/wangxiyang2022/DeepFusionMOT).
 
