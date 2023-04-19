@@ -1,4 +1,4 @@
-## Livox Detection for ITS applications
+## Livox Detection based on Official [LiVOX](https://github.com/Livox-SDK/livox_detection)
 
 This repository is built based on the previous work [livox detection](https://github.com/Livox-SDK/livox_detection).
 
