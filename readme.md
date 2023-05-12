@@ -6,12 +6,12 @@ We further deploy the pre-trained model on our own devices and accelerate by Ten
 
 We deploy deepfusion methods on [MOT](https://github.com/wangxiyang2022/DeepFusionMOT).
 
-<!--
+
 ## Demo
 We fine-tune the model on our own dataset for demonstration as below:
 ![demo1](demo/its1%2000_00_00-00_00_30.gif) 
 ![demo2](demo/its2%2000_00_00-00_00_30.gif)
--->
+
 
 
 
